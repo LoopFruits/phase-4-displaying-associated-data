@@ -1,9 +1,11 @@
 class DogHousesController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
+  #GET '/dog_houses/:id'
   def show
     dog_house = DogHouse.find(params[:id])
-    render json: dog_house
+    render json: dog_house, include: :reviews
+    # adding adding include: :reviews, to add a nested array 
   end
 
   private
